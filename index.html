@@ -2,84 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard - ARKC Solutions</title>
+  <title>Login - ARKC Solutions</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="topbar">
   <strong class="logo">ARKC Solutions</strong>
+</div>
 
-  <div class="topnav">
-    <a href="index.html">Dashboard</a>
-    <a href="employees.html">Employees</a>
-    <a href="clients.html">Clients</a>
-    <a href="authorizations.html">Service Approvals</a>
-    <a href="reports.html">Compliance Reports</a>
-  </div>
+<h1 class="page-title">Employee Login</h1>
 
-  <div class="user-menu">
-    <div class="dropdown">
-      <button class="user-button" onclick="toggleDropdown()">
-        <span id="userButtonName">User</span> ▼
-      </button>
+<div class="login-box">
+  <p class="login-subtext">Enter your username and password to access the system.</p>
 
-      <div id="dropdownMenu" class="dropdown-content">
-        <a href="employees.html">Profile</a>
-        <a href="#">Settings</a>
-        <a href="#" onclick="logout()">Logout</a>
-      </div>
-    </div>
+  <label for="username">Username</label>
+  <input type="text" id="username" placeholder="Enter your username">
+
+  <label for="password">Password</label>
+  <input type="password" id="password" placeholder="Enter your password">
+
+  <button onclick="login()">Login</button>
+
+  <p class="forgot-link">
+    <a href="#" onclick="forgotPassword(); return false;">Forgot password?</a>
+  </p>
+
+  <p id="error" style="color:red; margin-top:10px;"></p>
+
+  <div class="login-help">
+    <p><strong>Demo usernames:</strong></p>
+    <p>rlee</p>
+    <p>csantiago</p>
+    <p>akulovac</p>
+    <p>kjames</p>
   </div>
 </div>
 
-  <h1 class="page-title">Dashboard</h1>
-  <p class="subtitle">Manage employees, clients, approvals, compliance, and AI support in one place.</p>
+<script>
+function login() {
+  const username = document.getElementById("username").value.trim().toLowerCase();
+  const password = document.getElementById("password").value.trim();
 
-  <div class="dashboard-grid">
-    <div class="card">
-      <h2>👥 Employees</h2>
-      <p>View employee profiles, role assignments, background checks, training status, and uploaded documents.</p>
-      <a class="button-link" href="employees.html">Open Employees</a>
-    </div>
+  const validUsers = ["rlee", "csantiago", "akulovac", "kjames"];
 
-    <div class="card">
-      <h2>👤 Clients</h2>
-      <p>Manage client demographics, employment details, contact notes, and service documentation.</p>
-      <a class="button-link" href="clients.html">Open Clients</a>
-    </div>
+  if (validUsers.includes(username) && password !== "") {
+    localStorage.setItem("loggedInUser", username);
+    window.location.href = "dashboard.html";
+  } else {
+    document.getElementById("error").textContent = "Enter a valid username and password.";
+  }
+}
 
-    <div class="card">
-      <h2>📄 Service Approvals</h2>
-      <p>Track approval dates, service units, reimbursement rates, remaining units, and alerts.</p>
-      <a class="button-link" href="authorizations.html">Open Approvals</a>
-    </div>
-
-    <div class="card">
-      <h2>🤖 AI Support</h2>
-      <p>Run an AI completeness check to identify missing note details like duration or next steps.</p>
-      <a class="button-link" href="clients.html">Open AI Review</a>
-    </div>
-  </div>
-
-  <div class="full-width alerts-box">
-    <h2>🚨 Quick Alerts</h2>
-
-    <div class="alert-item">
-      ⚠️ <strong>Peter Parker</strong><br>
-      Missing time logged in client note
-    </div>
-
-    <div class="alert-item">
-      ⚠️ <strong>C. Santiago</strong><br>
-      Documentation Standards training still pending
-    </div>
-
-    <div class="alert-item high">
-      🔴 <strong>A-1002</strong><br>
-      Service approval is near expiration
-    </div>
-  </div>
+function forgotPassword() {
+  alert("Password reset link sent to your account.");
+}
+</script>
 
 </body>
 </html>
