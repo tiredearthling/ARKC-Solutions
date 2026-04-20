@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clients - ARKC Solutions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <strong class="logo">ARKC Solutions</strong>
+
+  <div class="topnav">
+    <a href="index.html">Dashboard</a>
+    <a href="employees.html">Employees</a>
+    <a href="clients.html">Clients</a>
+    <a href="authorizations.html">Service Approvals</a>
+    <a href="reports.html">Compliance Reports</a>
+  </div>
+
+  <div class="user-menu">
+    <div class="dropdown">
+      <button class="user-button" onclick="toggleDropdown()">
+        <span id="userButtonName">User</span> ▼
+      </button>
+
+      <div id="dropdownMenu" class="dropdown-content">
+        <a href="employees.html">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1 class="page-title">Client and Employment Information</h1>
+<p class="subtitle">Search and select a client to view demographics, employment details, and notes.</p>
+
+<h2>Client List</h2>
+<input
+  type="text"
+  id="clientSearch"
+  placeholder="Search client name..."
+  onkeyup="filterClients()"
+>
+
+<div id="searchResults" class="full-width" style="display:none;">
+  <ul id="clientList">
+    <li><a href="#" onclick="showClient('peter'); return false;">Peter Parker (C-001)</a></li>
+    <li><a href="#" onclick="showClient('tony'); return false;">Tony Stark (C-002)</a></li>
+    <li><a href="#" onclick="showClient('steve'); return false;">Steve Rogers (C-003)</a></li>
+    <li><a href="#" onclick="showClient('natasha'); return false;">Natasha Romanoff (C-004)</a></li>
+  </ul>
+</div>
+
+<div class="client-layout" id="profileSection" style="display:none;">
+
+  <div class="client-card">
+    <h2>Client Info</h2>
+    <p><strong>Name:</strong> <span id="clientName"></span></p>
+    <p><strong>Client ID:</strong> <span id="clientId"></span></p>
+    <p><strong>Phone:</strong> <span id="clientPhone"></span></p>
+    <p><strong>Email:</strong> <span id="clientEmail"></span></p>
+  </div>
+
+  <div class="client-card">
+    <h2>Employment Info</h2>
+    <p><strong>Employer:</strong> <span id="clientEmployer"></span></p>
+    <p><strong>Location:</strong> <span id="clientLocation"></span></p>
+    <p><strong>Job Title:</strong> <span id="clientJob"></span></p>
+    <p><strong>Hire Date:</strong> <span id="clientHire"></span></p>
+    <p><strong>Pay Rate:</strong> <span id="clientPay"></span></p>
+    <p><strong>Status:</strong> <span id="clientStatus"></span></p>
+  </div>
+
+  <div class="client-card">
+    <h2>Contact Notes and Service Documentation</h2>
+    <p><strong>Date:</strong> <span id="noteDate"></span></p>
+    <p><strong>Staff:</strong> <span id="noteStaff"></span></p>
+    <p><strong>Summary:</strong> <span id="noteSummary"></span></p>
+
+    <button onclick="checkAI()">Run AI Completeness Check</button>
+  </div>
+
+</div>
+
+<script>
+const clientData = {
+  peter: {
+    name: "Peter Parker",
+    id: "C-001",
+    phone: "(904) 111-1111",
+    email: "pparker@gmail.com",
+    employer: "Baptist Health",
+    location: "Jacksonville, FL",
+    job: "Patient Transport",
+    hire: "02/10/2026",
+    pay: "$18/hr",
+    status: "Employed",
+    noteDate: "03/01/2026",
+    noteStaff: "Roline Lee",
+    noteSummary: "Discussed transportation plan, job expectations, and next support steps."
+  },
+  tony: {
+    name: "Tony Stark",
+    id: "C-002",
+    phone: "(904) 222-2222",
+    email: "tstark@gmail.com",
+    employer: "Memorial Hospital",
+    location: "Jacksonville, FL",
+    job: "Supply Chain Tech",
+    hire: "02/12/2026",
+    pay: "$17/hr",
+    status: "Employed",
+    noteDate: "03/02/2026",
+    noteStaff: "Cristina Santiago",
+    noteSummary: "Reviewed job placement in tech consulting and scheduling flexibility."
+  },
+  steve: {
+    name: "Steve Rogers",
+    id: "C-003",
+    phone: "(904) 333-3333",
+    email: "srogers@gmail.com",
+    employer: "Mayo CLinic",
+    location: "Jacksonville, FL",
+    job: "Patient Sitter",
+    hire: "02/18/2026",
+    pay: "$19/hr",
+    status: "Employed",
+    noteDate: "03/03/2026",
+    noteStaff: "Armin Kulovac",
+    noteSummary: "Discussed physical job roles and long-term employment goals."
+  },
+  natasha: {
+    name: "Natasha Romanoff",
+    id: "C-004",
+    phone: "(904) 444-4444",
+    email: "nromanoff@gmail.com",
+    employer: "UF Health",
+    location: "Jacksonville, FL",
+    job: "Nurse Assistant",
+    hire: "02/20/2026",
+    pay: "$20/hr",
+    status: "Employed",
+    noteDate: "03/04/2026",
+    noteStaff: "Kasey James",
+    noteSummary: "Follow-up on employer feedback and workplace adjustment support."
+  }
+};
+
+function showClient(client) {
+  document.getElementById("clientName").textContent = clientData[client].name;
+  document.getElementById("clientId").textContent = clientData[client].id;
+  document.getElementById("clientPhone").textContent = clientData[client].phone;
+  document.getElementById("clientEmail").textContent = clientData[client].email;
+  document.getElementById("clientEmployer").textContent = clientData[client].employer;
+  document.getElementById("clientLocation").textContent = clientData[client].location;
+  document.getElementById("clientJob").textContent = clientData[client].job;
+  document.getElementById("clientHire").textContent = clientData[client].hire;
+  document.getElementById("clientPay").textContent = clientData[client].pay;
+  document.getElementById("clientStatus").textContent = clientData[client].status;
+  document.getElementById("noteDate").textContent = clientData[client].noteDate;
+  document.getElementById("noteStaff").textContent = clientData[client].noteStaff;
+  document.getElementById("noteSummary").textContent = clientData[client].noteSummary;
+
+  document.getElementById("profileSection").style.display = "grid";
+}
+
+function filterClients() {
+  const input = document.getElementById("clientSearch").value.toLowerCase();
+  const resultsBox = document.getElementById("searchResults");
+  const items = document.getElementById("clientList").getElementsByTagName("li");
+
+  let hasMatch = false;
+
+  for (let i = 0; i < items.length; i++) {
+    const text = items[i].textContent.toLowerCase();
+    if (text.includes(input) && input !== "") {
+      items[i].style.display = "";
+      hasMatch = true;
+    } else {
+      items[i].style.display = "none";
+    }
+  }
+
+  resultsBox.style.display = hasMatch ? "block" : "none";
+}
+
+function checkAI() {
+  alert("Missing Required Info:\n- Duration (minutes)\n- Next Steps\n\nSuggestion: Add a short outcome and next appointment.");
+}
+
+window.onload = function () {
+  const selectedClient = localStorage.getItem("selectedClient");
+
+  if (selectedClient) {
+    showClient(selectedClient);
+    localStorage.removeItem("selectedClient");
+  }
+};
+</script>
+
+</body>
+</html>

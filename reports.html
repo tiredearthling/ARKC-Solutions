@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Compliance Reports - ARKC Solutions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <strong class="logo">ARKC Solutions</strong>
+
+  <div class="topnav">
+    <a href="index.html">Dashboard</a>
+    <a href="employees.html">Employees</a>
+    <a href="clients.html">Clients</a>
+    <a href="authorizations.html">Service Approvals</a>
+    <a href="reports.html">Compliance Reports</a>
+  </div>
+
+  <div class="user-menu">
+    <div class="dropdown">
+      <button class="user-button" onclick="toggleDropdown()">
+        <span id="userButtonName">User</span> ▼
+      </button>
+
+      <div id="dropdownMenu" class="dropdown-content">
+        <a href="employees.html">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1 class="page-title">📊 Compliance Tracking Dashboard</h1>
+<p class="subtitle">Monitor documentation status, screening alerts, training issues, and expiring approvals.</p>
+
+<div class="dashboard-grid">
+  <div class="card">
+    <h2>✅ Compliant Records</h2>
+    <p class="metric">9</p>
+    <p>Complete employee, client, and approval records.</p>
+  </div>
+
+  <div class="card">
+    <h2>⚠️ Missing Information</h2>
+    <p class="metric warning">2</p>
+    <p>Records missing logged time or follow-up plan.</p>
+  </div>
+
+  <div class="card">
+    <h2>🔴 High Risk Alerts</h2>
+    <p class="metric danger">2</p>
+    <p>Urgent issues requiring immediate review.</p>
+  </div>
+
+  <div class="card">
+    <h2>🤖 AI Flags</h2>
+    <p class="metric">3</p>
+    <p>AI flagged records for incomplete service documentation.</p>
+  </div>
+</div>
+
+<div class="full-width alerts-box">
+  <h2>🚨 Compliance Alerts</h2>
+
+  <div class="alert-item">
+    ⚠️ <strong>Peter Parker</strong><br>
+    Missing time logged
+  </div>
+
+  <div class="alert-item">
+    ⚠️ <strong>Tony Stark</strong><br>
+    Missing follow-up plan
+  </div>
+
+  <div class="alert-item high">
+    🔴 <strong>Kasey James</strong><br>
+    AI Compliance training expired
+  </div>
+
+</div>
+
+<div class="full-width">
+  <h2>📋 Documentation Status</h2>
+  <table class="compliance-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Risk Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Peter Parker</td>
+        <td>Client Note</td>
+        <td>Missing Time Logged</td>
+        <td>Medium</td>
+      </tr>
+      <tr>
+        <td>Tony Stark</td>
+        <td>Client Note</td>
+        <td>Missing Follow-Up Plan</td>
+        <td>Medium</td>
+      </tr>
+      <tr>
+        <td>Cristina Santiago</td>
+        <td>Training Record</td>
+        <td>Pending</td>
+        <td>Medium</td>
+      </tr>
+      <tr>
+        <td>Kasey James</td>
+        <td>Training Record</td>
+        <td>Expired</td>
+        <td>High</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="full-width">
+  <h2>📝 Audit-Ready Reporting</h2>
+  <p>Summary includes employee compliance, client documentation completeness, service approval status, and AI review flags.</p>
+  <button onclick="alert('Audit report exported successfully')">Export Audit Report</button>
+</div>
+
+</body>
+</html>

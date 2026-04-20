@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Service Approvals - ARKC Solutions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <strong class="logo">ARKC Solutions</strong>
+
+  <div class="topnav">
+    <a href="index.html">Dashboard</a>
+    <a href="employees.html">Employees</a>
+    <a href="clients.html">Clients</a>
+    <a href="authorizations.html">Service Approvals</a>
+    <a href="reports.html">Compliance Reports</a>
+  </div>
+
+  <div class="user-menu">
+    <div class="dropdown">
+      <button class="user-button" onclick="toggleDropdown()">
+        <span id="userButtonName">User</span> ▼
+      </button>
+
+      <div id="dropdownMenu" class="dropdown-content">
+        <a href="employees.html">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1 class="page-title">📄 Service Approval Management</h1>
+<p class="subtitle">Click an approval record to view dates, units, reimbursement, remaining units, and alerts.</p>
+
+<div class="full-width">
+  <h2>Approved Services</h2>
+  <ul>
+    <li><a href="#" onclick="showAuth('a1'); return false;">📄 A-1001 — Peter Parker — Job Coaching ⚠</a></li>
+    <li><a href="#" onclick="showAuth('a2'); return false;">📄 A-1002 — Tony Stark — Job Support 🔴</a></li>
+    <li><a href="#" onclick="showAuth('a3'); return false;">📄 A-1003 — Steve Rogers — Career Planning</a></li>
+    <li><a href="#" onclick="showAuth('a4'); return false;">📄 A-1004 — Natasha Romanoff — Workplace Support</a></li>
+  </ul>
+</div>
+
+<div id="authDetails" class="full-width" style="display:none;">
+  <h2>Approval Details</h2>
+  <p><strong>Approval ID:</strong> <span id="authId"></span></p>
+  <p><strong>Client:</strong> <span id="authClient"></span></p>
+  <p><strong>Service:</strong> <span id="authService"></span></p>
+  <p><strong>Status:</strong> <span id="authStatus"></span></p>
+  <p><strong>Start Date:</strong> <span id="authStart"></span></p>
+  <p><strong>End Date:</strong> <span id="authEnd"></span></p>
+  <p><strong>Authorized Units:</strong> <span id="authUnits"></span></p>
+  <p><strong>Remaining Units:</strong> <span id="authRemaining"></span></p>
+  <p><strong>Duration:</strong> <span id="authDuration"></span></p>
+  <p><strong>Reimbursement Rate:</strong> <span id="authRate"></span></p>
+  <p><strong>Alert:</strong> <span id="authAlert"></span></p>
+</div>
+
+<script>
+function showAuth(auth) {
+  const data = {
+    a1: {
+      id: "A-1001",
+      client: "Peter Parker",
+      service: "Job Coaching",
+      status: "Active",
+      start: "02/01/2026",
+      end: "04/01/2026",
+      units: "20",
+      remaining: "6",
+      duration: "60 minutes",
+      rate: "$25/hr",
+      alert: "Needs review soon ⚠"
+    },
+    a2: {
+      id: "A-1002",
+      client: "Tony Stark",
+      service: "Job Support",
+      status: "Near Expiration",
+      start: "02/15/2026",
+      end: "03/15/2026",
+      units: "10",
+      remaining: "2",
+      duration: "45 minutes",
+      rate: "$30/hr",
+      alert: "Expiring soon 🔴"
+    },
+    a3: {
+      id: "A-1003",
+      client: "Steve Rogers",
+      service: "Career Planning",
+      status: "Active",
+      start: "01/20/2026",
+      end: "05/20/2026",
+      units: "15",
+      remaining: "12",
+      duration: "30 minutes",
+      rate: "$28/hr",
+      alert: "No issues"
+    },
+    a4: {
+      id: "A-1004",
+      client: "Natasha Romanoff",
+      service: "Workplace Support",
+      status: "Active",
+      start: "02/20/2026",
+      end: "04/20/2026",
+      units: "12",
+      remaining: "8",
+      duration: "50 minutes",
+      rate: "$27/hr",
+      alert: "No issues"
+    }
+  };
+
+  document.getElementById("authId").textContent = data[auth].id;
+  document.getElementById("authClient").textContent = data[auth].client;
+  document.getElementById("authService").textContent = data[auth].service;
+  document.getElementById("authStatus").textContent = data[auth].status;
+  document.getElementById("authStart").textContent = data[auth].start;
+  document.getElementById("authEnd").textContent = data[auth].end;
+  document.getElementById("authUnits").textContent = data[auth].units;
+  document.getElementById("authRemaining").textContent = data[auth].remaining;
+  document.getElementById("authDuration").textContent = data[auth].duration;
+  document.getElementById("authRate").textContent = data[auth].rate;
+  document.getElementById("authAlert").textContent = data[auth].alert;
+
+  document.getElementById("authDetails").style.display = "block";
+}
+</script>
+
+</body>
+</html>

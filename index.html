@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - ARKC Solutions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <strong class="logo">ARKC Solutions</strong>
+
+  <div class="topnav">
+    <a href="index.html">Dashboard</a>
+    <a href="employees.html">Employees</a>
+    <a href="clients.html">Clients</a>
+    <a href="authorizations.html">Service Approvals</a>
+    <a href="reports.html">Compliance Reports</a>
+  </div>
+
+  <div class="user-menu">
+    <div class="dropdown">
+      <button class="user-button" onclick="toggleDropdown()">
+        <span id="userButtonName">User</span> ▼
+      </button>
+
+      <div id="dropdownMenu" class="dropdown-content">
+        <a href="employees.html">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <h1 class="page-title">Dashboard</h1>
+  <p class="subtitle">Manage employees, clients, approvals, compliance, and AI support in one place.</p>
+
+  <div class="dashboard-grid">
+    <div class="card">
+      <h2>👥 Employees</h2>
+      <p>View employee profiles, role assignments, background checks, training status, and uploaded documents.</p>
+      <a class="button-link" href="employees.html">Open Employees</a>
+    </div>
+
+    <div class="card">
+      <h2>👤 Clients</h2>
+      <p>Manage client demographics, employment details, contact notes, and service documentation.</p>
+      <a class="button-link" href="clients.html">Open Clients</a>
+    </div>
+
+    <div class="card">
+      <h2>📄 Service Approvals</h2>
+      <p>Track approval dates, service units, reimbursement rates, remaining units, and alerts.</p>
+      <a class="button-link" href="authorizations.html">Open Approvals</a>
+    </div>
+
+    <div class="card">
+      <h2>🤖 AI Support</h2>
+      <p>Run an AI completeness check to identify missing note details like duration or next steps.</p>
+      <a class="button-link" href="clients.html">Open AI Review</a>
+    </div>
+  </div>
+
+  <div class="full-width alerts-box">
+    <h2>🚨 Quick Alerts</h2>
+
+    <div class="alert-item">
+      ⚠️ <strong>Peter Parker</strong><br>
+      Missing time logged in client note
+    </div>
+
+    <div class="alert-item">
+      ⚠️ <strong>C. Santiago</strong><br>
+      Documentation Standards training still pending
+    </div>
+
+    <div class="alert-item high">
+      🔴 <strong>A-1002</strong><br>
+      Service approval is near expiration
+    </div>
+  </div>
+
+</body>
+</html>

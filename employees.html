@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employees - ARKC Solutions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <strong class="logo">ARKC Solutions</strong>
+
+  <div class="topnav">
+    <a href="index.html">Dashboard</a>
+    <a href="employees.html">Employees</a>
+    <a href="clients.html">Clients</a>
+    <a href="authorizations.html">Service Approvals</a>
+    <a href="reports.html">Compliance Reports</a>
+  </div>
+
+  <div class="user-menu">
+    <div class="dropdown">
+      <button class="user-button" onclick="toggleDropdown()">
+        <span id="userButtonName">User</span> ▼
+      </button>
+
+      <div id="dropdownMenu" class="dropdown-content">
+        <a href="employees.html">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="user-menu">
+      <button class="user-button" onclick="logout()">
+        <span id="userButtonName">User</span>
+      </button>
+    </div>
+  </div>
+
+  <h1 class="page-title">Employee Profile</h1>
+  <p class="subtitle">Your profile, compliance status, and assigned clients.</p>
+
+  <div class="employee-layout">
+
+    <div class="employee-profile-card">
+      <h2>Employee Profile</h2>
+      <p><strong>Name:</strong> <span id="employeeName"></span></p>
+      <p><strong>Username:</strong> <span id="employeeUsername"></span></p>
+      <p><strong>Role:</strong> <span id="employeeRole"></span></p>
+      <p><strong>Status:</strong> <span id="employeeStatus"></span></p>
+    </div>
+
+    <div class="employee-mini-card employee-screening-card">
+      <h2>Background Screening</h2>
+      <p><strong>Screening Status:</strong> <span id="screeningStatus"></span></p>
+      <p><strong>Expiration Date:</strong> <span id="screeningExpiration"></span></p>
+      <p><strong>Alert:</strong> <span id="screeningAlert"></span></p>
+    </div>
+
+    <div class="employee-mini-card employee-training-card">
+      <h2>Required Training</h2>
+      <p><strong>Training:</strong> <span id="trainingName"></span></p>
+      <p><strong>Status:</strong> <span id="trainingStatus"></span></p>
+      <p><strong>Completion Date:</strong> <span id="trainingDate"></span></p>
+    </div>
+
+    <div class="employee-wide-card">
+      <h2>Assigned Clients</h2>
+      <ul id="assignedClientsList"></ul>
+    </div>
+
+    <div class="employee-thin-card">
+      <h2>Secure Document Upload</h2>
+      <div class="upload-row">
+        <input type="file">
+        <button onclick="alert('Document uploaded successfully')">Upload Document</button>
+      </div>
+
+      <div class="doc-list">
+        <p><strong>Uploaded Documents:</strong></p>
+        <p>✔ <span id="docOne"></span></p>
+        <p>✔ <span id="docTwo"></span></p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const employeeData = {
+      rlee: {
+        name: "Roline Lee",
+        username: "rlee",
+        role: "Project Manager",
+        status: "Active",
+        screeningStatus: "Complete",
+        screeningExpiration: "12/15/2026",
+        screeningAlert: "No issues",
+        trainingName: "Compliance Training",
+        trainingStatus: "Complete",
+        trainingDate: "02/20/2026",
+        docOne: "Background_Check_RLee.pdf",
+        docTwo: "Compliance_Certificate_RLee.pdf",
+        assignedClients: [
+          { key: "peter", label: "Peter Parker" }
+        ]
+      },
+      csantiago: {
+        name: "Cristina Santiago",
+        username: "csantiago",
+        role: "Systems Analyst",
+        status: "Active",
+        screeningStatus: "Complete",
+        screeningExpiration: "11/30/2026",
+        screeningAlert: "No issues",
+        trainingName: "Documentation Standards",
+        trainingStatus: "Pending ⚠",
+        trainingDate: "Not yet completed",
+        docOne: "Background_Check_CSantiago.pdf",
+        docTwo: "Role_Assignment_CSantiago.pdf",
+        assignedClients: [
+          { key: "tony", label: "Tony Stark" }
+        ]
+      },
+      akulovac: {
+        name: "Armin Kulovac",
+        username: "akulovac",
+        role: "Database Developer",
+        status: "Active",
+        screeningStatus: "Complete",
+        screeningExpiration: "10/10/2026",
+        screeningAlert: "Review in 60 days",
+        trainingName: "System Security",
+        trainingStatus: "Complete",
+        trainingDate: "02/18/2026",
+        docOne: "Background_Check_AKulovac.pdf",
+        docTwo: "Security_Training_AKulovac.pdf",
+        assignedClients: [
+          { key: "steve", label: "Steve Rogers" }
+        ]
+      },
+      kjames: {
+        name: "Kasey James",
+        username: "kjames",
+        role: "AI Lead",
+        status: "Active",
+        screeningStatus: "Complete",
+        screeningExpiration: "09/15/2026",
+        screeningAlert: "Expires soon 🔴",
+        trainingName: "AI Compliance",
+        trainingStatus: "Expired 🔴",
+        trainingDate: "01/10/2026",
+        docOne: "Background_Check_KJames.pdf",
+        docTwo: "AI_Compliance_KJames.pdf",
+        assignedClients: [
+          { key: "natasha", label: "Natasha Romanoff" }
+        ]
+      }
+    };
+
+    function loadEmployee(username) {
+      const employee = employeeData[username];
+
+      if (!employee) {
+        document.body.innerHTML = "<h1>User not found</h1><p>Please go back to login.</p>";
+        return;
+      }
+
+      document.getElementById("employeeName").textContent = employee.name;
+      document.getElementById("employeeUsername").textContent = employee.username;
+      document.getElementById("employeeRole").textContent = employee.role;
+      document.getElementById("employeeStatus").textContent = employee.status;
+
+      document.getElementById("screeningStatus").textContent = employee.screeningStatus;
+      document.getElementById("screeningExpiration").textContent = employee.screeningExpiration;
+      document.getElementById("screeningAlert").textContent = employee.screeningAlert;
+
+      document.getElementById("trainingName").textContent = employee.trainingName;
+      document.getElementById("trainingStatus").textContent = employee.trainingStatus;
+      document.getElementById("trainingDate").textContent = employee.trainingDate;
+
+      document.getElementById("docOne").textContent = employee.docOne;
+      document.getElementById("docTwo").textContent = employee.docTwo;
+
+      document.getElementById("userButtonName").textContent = employee.name;
+
+      const clientList = document.getElementById("assignedClientsList");
+      clientList.innerHTML = "";
+
+      employee.assignedClients.forEach(client => {
+        const li = document.createElement("li");
+
+        const link = document.createElement("a");
+        link.href = "clients.html";
+        link.textContent = client.label;
+        link.onclick = function () {
+          localStorage.setItem("selectedClient", client.key);
+        };
+
+        li.appendChild(link);
+        clientList.appendChild(li);
+      });
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      localStorage.removeItem("selectedClient");
+      window.location.href = "login.html";
+    }
+
+    window.onload = function () {
+      const loggedInUser = localStorage.getItem("loggedInUser");
+
+      if (!loggedInUser) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      loadEmployee(loggedInUser);
+    };
+  </script>
+
+</body>
+</html>
